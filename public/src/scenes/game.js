@@ -32,7 +32,7 @@ export default class Game extends Phaser.Scene {
             this.load.image('platform', "assets/PNG/Environment/ground_grass.png")
             this.load.image('bunny-stand', 'assets/PNG/Player/bunny1_stand.png')
             this.load.image('bunny-jump','assets/PNG/Player/bunny1_jump.png    ')
-            this.load.image('carrot', 'assets/PNG/items/carrot.png');
+            this.load.image('carrot', 'carrot.png');
             this.cursors = this.input.keyboard.createCursorKeys();
 
         }
