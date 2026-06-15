@@ -51,11 +51,11 @@ export default class Game extends Phaser.Scene {
         const width = this.scale.width;
         const height = this.scale.height;
         
-        const leftBtn = this.add.zone(0, 600, 240, 1000)
+        const leftBtn = this.add.zone(0, height, width /2, height)
         .setInteractive()
         .setScrollFactor(0);
 
-        const rightBtn = this.add.zone(240, 600, 240, 1000)
+        const rightBtn = this.add.zone(width/2, height, width/2, height)
         .setInteractive()
         .setScrollFactor(0);
 
@@ -68,7 +68,7 @@ export default class Game extends Phaser.Scene {
          rightBtn.on('pointerout', () => { this.moveRight = false; });
          
          this.input.addPointer(1);
-         
+
         this.add.image(240, 320, 'background').setScrollFactor(1, 0);
         this.platforms = this.physics.add.staticGroup();
 
