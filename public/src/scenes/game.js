@@ -33,6 +33,9 @@ export default class Game extends Phaser.Scene {
             this.load.image('bunny-stand', 'assets/PNG/Player/bunny1_stand.png')
             this.load.image('bunny-jump','assets/PNG/Player/bunny1_jump.png    ')
             this.load.image('carrot', 'carrot.png');
+            this.load.image('left-arrow', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAsklEQVRoQ+2WwQ7AIAhE7f8/tHex6clgWwsh6mFv9mSAYw6Id9w6gWe6gAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6lkAm+gXisb6XuwNfub8v30VjU+Nen8gZ6v3wunP5YF30N1WvGZAv36fU7gAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYwE838AAr4T/67gI9PwAAAABJRU5ErkJggg==');
+            this.load.image('right-arrow', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAu0lEQVRoQ+2WwQ7AIAhE7f8/tHex6clgWwsh6mFv9mSAYw6Id9w6gWe6gAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6lkAm+gXisb6XuwNfub8v30VjU+Nen8gZ6v3wunP5YF30N1WvGZAv36fU7gAnwXIDVv6mYgAnwXIDVv6mYgAnwXIDVv6mYwE838AAr4T/67gI9PwAAAABJRU5ErkJggg==');
+
             this.cursors = this.input.keyboard.createCursorKeys();
 
         }
@@ -44,17 +47,33 @@ export default class Game extends Phaser.Scene {
     carrots
 
     create() {
+        
+        const width = this.scale.width;
+        const height = this.scale.height;
 
-        const leftBtn = this.add.zone(0, 600, 240, 1000).setInteractive();
-        const rightBtn = this.add.zone(240, 600, 240, 1000).setInteractive();
+        const leftBtn = this.add.image(60, height - 60, 'left-arrow')
+            .setInteractive()
+            .setScrollFactor(0) // CRITICAL: Keeps button locked to the UI layer
+            .setAlpha(0.6);     // Makes the button slightly transparent
 
-          leftBtn.on('pointerdown', () => { this.moveLeft = true; });
-          leftBtn.on('pointerup', () => { this.moveLeft = false; });
-          leftBtn.on('pointerout', () => { this.moveLeft = false; });
+        leftBtn.on('pointerdown', () => { this.moveLeft = true; });
+        leftBtn.on('pointerup', () => { this.moveLeft = false; });
+        leftBtn.on('pointerout', () => { this.moveLeft = false; });
 
-         rightBtn.on('pointerdown', () => { this.moveRight = true; });
-         rightBtn.on('pointerup', () => { this.moveRight = false; });
-         rightBtn.on('pointerout', () => { this.moveRight = false; });
+    // --- RIGHT BUTTON ---
+        const rightBtn = this.add.image(width - 60, height - 60, 'right-arrow')
+            .setInteractive()
+            .setScrollFactor(0) // CRITICAL: Keeps button locked to the UI layer
+            .setAlpha(0.6);
+        
+        rightBtn.setFlipX(true); // Flips the left arrow texture horizontally
+
+        rightBtn.on('pointerdown', () => { this.moveRight = true; });
+        rightBtn.on('pointerup', () => { this.moveRight = false; });
+        rightBtn.on('pointerout', () => { this.moveRight = false; });
+
+    // Enable multi-touch so holding buttons down works nicely
+        this.input.addPointer(1);
 
         this.add.image(240, 320, 'background').setScrollFactor(1, 0);
         this.platforms = this.physics.add.staticGroup();
