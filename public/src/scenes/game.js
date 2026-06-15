@@ -55,7 +55,7 @@ export default class Game extends Phaser.Scene {
         .setInteractive()
         .setScrollFactor(0);
 
-        const rightBtn = this.add.zone(width/2, height, width/2, height)
+        const rightBtn = this.add.zone(width/2, height, width/1.5, height)
         .setInteractive()
         .setScrollFactor(0);
 
