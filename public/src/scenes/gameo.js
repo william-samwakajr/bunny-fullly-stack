@@ -5,7 +5,7 @@ export default class GameOver extends Phaser.Scene {
         super('game-over')
     }
     init(data){
-        this.score = data;
+        this.score = data || 0;
     }
     preload(){
         this.load.image('background', 'assets/PNG/Background/bg_layer1.png')

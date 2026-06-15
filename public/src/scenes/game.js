@@ -4,7 +4,7 @@ import Carrot from '../Game/carrot.js';
 
 export default class Game extends Phaser.Scene {
     init(){
-        this.carrotsCollected = 0
+        this.carrotsCollected = 0;
     }
     
     /**
