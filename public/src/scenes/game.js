@@ -45,8 +45,8 @@ export default class Game extends Phaser.Scene {
 
     create() {
 
-        const leftBtn = this.add.zone(0, 600, 1000, 240).setInteractive();
-        const rightBtn = this.add.zone(240, 600, 1000, 240).setInteractive();
+        const leftBtn = this.add.zone(0, 600, 240, 1000).setInteractive();
+        const rightBtn = this.add.zone(240, 600, 240, 1000).setInteractive();
 
           leftBtn.on('pointerdown', () => { this.moveLeft = true; });
           leftBtn.on('pointerup', () => { this.moveLeft = false; });
