@@ -44,6 +44,18 @@ export default class Game extends Phaser.Scene {
     carrots
 
     create() {
+
+        const leftBtn = this.add.zone(0, 600, 150, 500).setInteractive();
+        const rightBtn = this.add.zone(240, 600, 150, 500).setInteractive();
+
+          leftBtn.on('pointerdown', () => { this.moveLeft = true; });
+          leftBtn.on('pointerup', () => { this.moveLeft = false; });
+          leftBtn.on('pointerout', () => { this.moveLeft = false; });
+
+         rightBtn.on('pointerdown', () => { this.moveRight = true; });
+         rightBtn.on('pointerup', () => { this.moveRight = false; });
+         rightBtn.on('pointerout', () => { this.moveRight = false; });
+
         this.add.image(240, 320, 'background').setScrollFactor(1, 0);
         this.platforms = this.physics.add.staticGroup();
 
@@ -116,10 +128,14 @@ export default class Game extends Phaser.Scene {
             this.player.setTexture('bunny-stand')
         }
 
-        if (this.cursors.left.isDown && !touchingDown) {
-            this.player.setVelocityX(-200);
-        } else if (this.cursors.right.isDown && !touchingDown) {
+        if ( this.cursors.left.isDown || this.moveLeft) {
+            if (!touchingDown){
+                this.player.setVelocityX(-200);
+            }
+        } else if (this.cursors.right.isDown || this.moveRight ) {
+            if (!touchingDown){
             this.player.setVelocityX(200);
+            }
         } else {
             this.player.setAccelerationX(0)
         }
