@@ -51,11 +51,11 @@ export default class Game extends Phaser.Scene {
         const width = this.scale.width;
         const height = this.scale.height;
         
-        const leftBtn = this.add.zone(0, height, width + width /2, height)
+        const leftBtn = this.add.zone(0, height, width , height)
         .setInteractive()
         .setScrollFactor(0);
 
-        const rightBtn = this.add.zone(width, height, width/0.2, height)
+        const rightBtn = this.add.zone(width, height, width, height)
         .setInteractive()
         .setScrollFactor(0);
 
