@@ -27,7 +27,7 @@ export default class Game extends Phaser.Scene {
         /**  @type {Phaser.Types.Input.Keyboard.CursorKeys} */
     cursors
     preload() {
-            //this.load.audio('jump','assets/sound/phasejump1.ogg');
+           // this.load.audio('jump','/assets/sound/phasejump1.ogg');
             this.load.image('background', 'assets/PNG/Background/bg_layer1.png')
             this.load.image('platform', "assets/PNG/Environment/ground_grass.png")
             this.load.image('bunny-stand', 'assets/PNG/Player/bunny1_stand.png')
@@ -86,7 +86,11 @@ export default class Game extends Phaser.Scene {
         }
 
         this.player = this.physics.add.sprite(240, 320, 'bunny-stand').setScale(0.5);
-        this.physics.add.collider(this.platforms, this.player);
+
+        this.physics.add.collider(this.platforms, this.player,()=>{
+            
+           //if (this.player.body.touching.down) this.sound.play('jump');
+        });
 
         this.player.body.checkCollision.up = false;
         this.player.body.checkCollision.right = false;
@@ -126,15 +130,14 @@ export default class Game extends Phaser.Scene {
             }
             const bottomplatform = this.findBottomMostPlatfrom()
             if (this.player.y > bottomplatform.y + 200){
-                this.scene.start('game-over')
+                this.scene.start('game-over',this.carrotsCollected)
             }
         })
 
         const touchingDown = this.player.body.touching.down;
         if (touchingDown) {
-            this.player.setVelocityY(-350);
+        this.player.setVelocityY(-350);
             this.player.setTexture('bunny-jump')
-           // this.sound.play('jump')
         }
         const vy = this.player.body.velocity.y
         if(vy > 0 && this.player.texture.key !== touchingDown){
