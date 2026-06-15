@@ -47,7 +47,7 @@ export default class Game extends Phaser.Scene {
     carrots
 
     create() {
-        
+       // 
         const width = this.scale.width;
         const height = this.scale.height;
         
