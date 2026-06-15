@@ -50,31 +50,25 @@ export default class Game extends Phaser.Scene {
         
         const width = this.scale.width;
         const height = this.scale.height;
-
-        const leftBtn = this.add.image(60, height - 60, 'left-arrow')
-            .setInteractive()
-            .setScrollFactor(0) // CRITICAL: Keeps button locked to the UI layer
-            .setAlpha(0.6);     // Makes the button slightly transparent
-
-        leftBtn.on('pointerdown', () => { this.moveLeft = true; });
-        leftBtn.on('pointerup', () => { this.moveLeft = false; });
-        leftBtn.on('pointerout', () => { this.moveLeft = false; });
-
-    // --- RIGHT BUTTON ---
-        const rightBtn = this.add.image(width - 60, height - 60, 'right-arrow')
-            .setInteractive()
-            .setScrollFactor(0) // CRITICAL: Keeps button locked to the UI layer
-            .setAlpha(0.6);
         
-        rightBtn.setFlipX(true); // Flips the left arrow texture horizontally
+        const leftBtn = this.add.zone(0, 600, 240, 1000)
+        .setInteractive()
+        .setScrollFactor(0);
 
-        rightBtn.on('pointerdown', () => { this.moveRight = true; });
-        rightBtn.on('pointerup', () => { this.moveRight = false; });
-        rightBtn.on('pointerout', () => { this.moveRight = false; });
+        const rightBtn = this.add.zone(240, 600, 240, 1000)
+        .setInteractive()
+        .setScrollFactor(0);
 
-    // Enable multi-touch so holding buttons down works nicely
-        this.input.addPointer(1);
+          leftBtn.on('pointerdown', () => { this.moveLeft = true; });
+          leftBtn.on('pointerup', () => { this.moveLeft = false; });
+          leftBtn.on('pointerout', () => { this.moveLeft = false; });
 
+         rightBtn.on('pointerdown', () => { this.moveRight = true; });
+         rightBtn.on('pointerup', () => { this.moveRight = false; });
+         rightBtn.on('pointerout', () => { this.moveRight = false; });
+         
+         this.input.addPointer(1);
+         
         this.add.image(240, 320, 'background').setScrollFactor(1, 0);
         this.platforms = this.physics.add.staticGroup();
 
