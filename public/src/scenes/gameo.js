@@ -5,7 +5,8 @@ export default class GameOver extends Phaser.Scene {
         super('game-over')
     }
     init(data){
-        this.score = data || 0;
+        this.score = data.score || 0;
+        this.name = data.name;
     }
     preload(){
         this.load.image('background', 'assets/PNG/Background/bg_layer1.png')
@@ -18,7 +19,7 @@ export default class GameOver extends Phaser.Scene {
         this.add.text(width*0.5,height*0.5,'Game Over',{color:'#000',fontSize: 48})
         .setOrigin(0.5)
         
-        this.add.text(width*0.5, height*0.6, `Score: ${this.score}`, {color:'#000',fontSize:30})
+        this.add.text(width*0.5, height*0.6, ` ${this.name} Score: ${this.score}`, {color:'#000',fontSize:30})
         .setOrigin(0.5)
 
         this.add.text(width*0.5, height*0.7, 'Press SPACE  or TAP SCREEN to try again', {color:'#000',fontSize:20})

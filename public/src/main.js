@@ -1,6 +1,7 @@
 import Phaser from './lib/phaser.js';
 import Game from './scenes/game.js';
 import GameOver from './scenes/gameo.js';
+import StartScreen from './scenes/Start.js';
 
 /*
  Drawing the game to the window
@@ -13,7 +14,11 @@ export default new Phaser.Game({
     width:480,
     height: 640
     },
-    scene:[ Game, GameOver],
+    parent: 'game-container',
+    dom:{
+        createContainer: true
+    },
+    scene:[ StartScreen,Game, GameOver],
     physics: {
         default: 'arcade',
         arcade: {

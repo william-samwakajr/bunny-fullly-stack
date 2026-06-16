@@ -3,8 +3,9 @@ import Carrot from '../Game/carrot.js';
 
 
 export default class Game extends Phaser.Scene {
-    init(){
-        this.carrotsCollected = 0;
+    init(data){
+      this.carrotsCollected = 0;
+      this.playerName = data.name;
     }
     
     /**
@@ -130,7 +131,7 @@ export default class Game extends Phaser.Scene {
             }
             const bottomplatform = this.findBottomMostPlatfrom()
             if (this.player.y > bottomplatform.y + 200){
-                this.scene.start('game-over',this.carrotsCollected)
+                this.scene.start('game-over',{score : this.carrotsCollected, name : this.playerName})
             }
         })
 
